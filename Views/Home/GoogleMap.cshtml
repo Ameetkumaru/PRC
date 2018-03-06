@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="col-md-12 col-sm-12 col-lg-12" id="GoogleMap" style="width:300px;height:250px;"></div>
+
+<script type="text/javascript">
+    function initMap() {
+
+        var lati = parseFloat('@ViewBag.latitude');
+        var longi = parseFloat('@ViewBag.longitude');
+
+        //alert(lati + "    " + longi);
+
+        //var lati = 40.312589;
+        //var longi = -89.408236;
+        if ((lati == (40.312589)) && (longi == (-89.408236))) {
+            var uluru = { lat: lati, lng: longi };
+            var map = new google.maps.Map(document.getElementById('GoogleMap'), {
+                zoom: 5,
+                center: uluru
+            });
+        } else {
+            var uluru = { lat: lati, lng: longi };
+            var map = new google.maps.Map(document.getElementById('GoogleMap'), {
+                zoom: 11,
+                center: uluru
+            });
+        }
+        
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            title: '@ViewBag.SchoolName'
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkiVDWgzQYTQeAC06VgJCjSrB4XPuMJSA&callback=initMap">
+</script>

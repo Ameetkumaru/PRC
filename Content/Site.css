@@ -1,0 +1,92 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*Container will hold image and the text*/
+.container1 {
+    position: relative;
+    text-align:center;
+}
+
+/* Bottom right text*/
+.text-block {
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    color: white;
+}
+
+.jumbotron-Index {
+    background-image: url(../Assets/Images/Home/LayoutImage2.jpg);
+    background-attachment: fixed;
+    min-height: 400px;
+    margin-bottom: 8px;
+    margin-top: 0px;
+    color: black;
+    border-radius: 6px;
+}
+
+.jumbotron-textbox {
+   position:relative;
+   height:30%;
+    top:25px;
+    display:grid;
+    align-items: center;
+    background-color: black;
+    opacity: 0.7;
+    font-size:larger; color:white ;
+    border-radius:6px;
+
+}
+
+.textbox{
+    width:200px ;
+}
+
+.Surveybutton {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    /*optional*/
+    font-family: arial,sans-serif; /*input has OS specific font-family*/  
+    cursor: pointer;
+    
+}
+
+
+.FooterFixed {
+    position: fixed;
+    left: 0px;      
+    width: 100%;
+   
+}
+
+.sideMarginTop {    
+    margin-top: 1%;
+}
+
+.CollapseBorder {
+    border-collapse: collapse;
+    border-radius: 6px;
+}

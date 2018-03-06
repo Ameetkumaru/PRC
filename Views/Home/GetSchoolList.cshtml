@@ -1,0 +1,28 @@
+﻿@model IEnumerable<PRC.Models.SchoolModel>
+
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br /><br /><br />
+<h2>Select Your School</h2>
+
+<table class="table table-responsive">
+
+    <tbody>
+        @if (ViewBag.SchoolList != null)
+        {
+            foreach (var items in ViewBag.SchoolList)
+            {
+                <tr>
+                    
+                    <td>@Html.ActionLink((String)items.InstName, "SetValue", "SchoolDetail", new { SchoolID = (object)items.UNITID },new { })</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+@Html.ActionLink("Go Back","Index","Home",null,new { @class="btn btn-primary"})
+

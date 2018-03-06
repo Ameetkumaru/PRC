@@ -1,0 +1,10 @@
+﻿
+
+<option value="">--Select ZIP--</option>
+@if (ViewBag.SchoolList != null)
+{
+    foreach (var items in ViewBag.SchoolList)
+    {
+        <option value="@items.Value">@items.Text</option>
+    }
+}

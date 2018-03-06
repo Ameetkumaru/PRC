@@ -1,0 +1,80 @@
+﻿@model PRC.Models.SchoolModel
+@{
+    Layout = null;
+
+}
+
+
+<div class="container">
+    <div class="row col-md-12 col-lg-12 col-sm-12">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" id="AdvancedSearch" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Advanced Search
+        </button>
+        <br />
+    </div>
+    <div class="table " id="tab-data">
+        <div class="row ">
+            <div class="collapse" id="collapseExample">
+                <div class="card card-block">
+                    <br />
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        @*@Html.DropDownListFor("FooBarDropDown", ViewBag.SchoolList as SelectList, "--Select County--", new { @class = "btn btn-warning" })*@
+                        @Html.DropDownListFor(Model => Model.countyname, ViewBag.SchoolList as SelectList, "--Select County--", new { @class = "form-control btn btn-warning", id = "countyList" })
+                    </div>
+
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        @Html.DropDownListFor(Model => Model.cityname, new SelectList(""), "--Select City--", new { @class = "form-control btn btn-warning", id = "CityList" })
+
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-sm-3">
+                        @Html.DropDownListFor(Model => Model.zip, new SelectList(""), "--Select ZIP--", new { @class = "form-control btn btn-warning", id = "ZIPList" })
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#countyList").change(function () {
+            var county= $(this).val();
+            $.ajax({
+                type: "POST",
+                url: "/Home/GetCityList?county=" + county,
+                    contentType:"html",
+                    success: function (response) {
+                        $('#CityList').empty();
+                        $('#CityList').append(response);
+
+                        $("#CityList").change(function () {
+                            var city = $(this).val();
+
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/Home/GetZip?city=" + city,
+                                contentType: "html",
+                                success: function (response) {
+                                    $('#ZIPList').empty();
+                                    $('#ZIPList').append(response);
+                                    $("#ZIPList").change(function () {
+                                        var zip = $(this).val();
+                                        url = '@Url.Action("GetSchoolList", "Home", new {id = ""})' + '?zip=' + zip;
+            window.location.href = url;
+
+                                    });
+                                }
+                            })
+        });
+                    }
+            })
+            @*url = '@Url.Action("SetValue", "SchoolDetail", new {id = ""})' + '?SchoolID=' + selected;
+            window.location.href = url;*@
+        });
+});
+</script>

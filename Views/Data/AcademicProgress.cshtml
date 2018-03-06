@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "AcademicProgress";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<br />
+<input type="hidden" id="hdnSession" data-value="@Request.RequestContext.HttpContext.Session["SchoolID"]" />
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Assets/HighchartsScript/AcademicProgress.js"></script>
+<br />
+
+<div class="col-sm-9 col-sm-push-3 ">
+    <div class=" col-md-12 col-lg-12">
+        <div id="Enrollment">
+            <div id="Enrollment" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div id="CollegeReadiness">
+            <div id="CollegeReadiness" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div id="DistrictFinance">
+            <div id="DistrictFinance" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div id="AdminStudentRatio">
+            <div id="AdminStudentRatio" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div id="HealthWellness">
+            <div id="HealthWellness" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div id="PrincipalTurnover">
+            <div id="PrincipalTurnover" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,211 @@
+﻿@model PRC.Data.DTO.GetSchoolDetail
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Illinois Postsecondary Report Card
+    </title>
+    <link rel="shortcut icon" href="~/Assets/Images/Home/favicon.ico" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar navbar-inverse navbar-fixed-top " style="background-color:black">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="~/Assets/Images/Home/IllinoisLogo1.jpeg" height="60px" alt="illinois Postsecondary Report Card"><span style="display:inline-block"></span></a>
+                </div>
+            </div>
+            <div class="navbar-collapse collapse navbar-right list-inline">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="true">Our Story <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink(" Key Questions", "KeyQuestions", "OurStory", null, new { @class = "glyphicon glyphicon-hand-right" })</li>
+                            <li>@Html.ActionLink(" Concept", "Concept", "OurStory", null, new { @class = "glyphicon glyphicon-hand-right" })</li>
+                            <li>@Html.ActionLink(" Timeline", "TimeLine", "OurStory", null, new { @class = "glyphicon glyphicon-hand-right" })</li>
+                            <li>@Html.ActionLink(" Data", "Metrics", "OurStory", null, new { @class = "glyphicon glyphicon-hand-right" })</li>
+                        </ul>
+                    </li>
+
+                    <li><a data-toggle="modal" href="#myModal">Take the Survey</a></li>
+                    <li>@Html.ActionLink("Help", "Help", "Home")</li>
+                    <li><a href="https://www.iccb.org/data/?page_id=18" target="_blank">ICCB Data Library <span class="glyphicon glyphicon-new-window"></span></a></li>
+                    <li><a href="http://www.ibhe.org/Data%20Bank/default.htm" target="_blank">IBHE Data Statistics <span class="glyphicon glyphicon-new-window"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title text-center">Illinois Postsecondary Report Card</h2>
+                </div>
+                <div class="modal-body">
+                    <h4>How would you identify yourself? </h4>
+                    @Html.TextBox("identify", null, new { @class = "input-sm", @placeholder = "Student / Teacher/Research" })
+                    <br />
+                    <h4>How did you hear about the online report card?  </h4>
+                    @Html.TextBox("identify", null, new { @class = "input-sm", @placeholder = "Facebook / LinkedIn /Newspaper" })
+                    <br />
+                    <h4>Please use this space to highlight any parts of the Illinois Report Card website you had a hard time understanding </h4>
+                    @Html.TextBox("identify", null, new { @class = "input-sm", @placeholder = "" })
+                    <br />
+                    <h4>Please use this space to highlight any other comments or questions you may have about the Illinois Report Card website.  </h4>
+                    @Html.TextBox("identify", null, new { @class = "input-sm", @placeholder = "" })
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <center>    <h1 style="color:coral">@HttpContext.Current.Session["SchoolName"].ToString()</h1></center>
+    <hr />
+    <!-- Main Body Content-->
+    <div class="container body-content">
+        <div class="row">
+            @RenderBody()
+            <div class="col-sm-3 col-sm-pull-9 sideMarginTop ">
+                <div class="panel-group btn-warning " id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading " role="tab" id="headingOne">
+                            <h4 class="panel-title ">
+                                <a class="collapsed " role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    @Html.ActionLink("School Snapshot", "Index", "SchoolDetail")
+                                </a>
+                            </h4>
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Academic Progress
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse @(ViewContext.RouteData.Values["Action"].ToString() == "Index" || ViewContext.RouteData.Values["Action"].ToString() == "Enrollment" )" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <ul class="list-group" id="earlyside">
+                                    <li class="list-group-item">@Html.ActionLink("Enrollment", "AcademicProgress", "Data", new { tab = "Enrollment" }, new { id = "#Enrollment" })</li>
+                                    <li class="list-group-item">@Html.ActionLink("College Readiness", "AcademicProgress", "Data", new { tab = "CollegeReadiness" }, new { id = "#CollegeReadiness" })</li>
+                                </ul>000000000.
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    School Environment
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <ul class="list-group" id="earlyside">
+                                    <li class="list-group-item">@Html.ActionLink("District Finance", "AcademicProgress", "Data", new { tab = "DistrictFinance" }, new { id = "#DistrictFinance" })</li>
+                                    <li class="list-group-item">@Html.ActionLink("Health and Wellness", "AcademicProgress", "Data", new { tab = "HealthWellness" }, new { id = "#HealthWellness" })</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Administrators
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body">
+                                <ul class="list-group" id="earlyside">
+                                    <li class="list-group-item">@Html.ActionLink("Admin Student Ratio", "AcademicProgress", "Data", new { tab = "AdminStudentRatio" }, new { id = "#AdminStudentRatio" })</li>
+                                    <li class="list-group-item">@Html.ActionLink("Principal Turnover", "AcademicProgress", "Data", new { tab = "PrincipalTurnover" }, new { id = "#PrincipalTurnover" })</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br /><br /><br />
+
+
+
+    <!-- Footer -->
+    <div class="container">
+        <hr />
+        <footer>
+            <div class="col-md-12 col-sm-12 col-lg-12 ">
+                <div class="row">
+                    <div class="text-center">
+                        @Html.ActionLink("Help", "Help", "Home") |
+                        @Html.ActionLink("About Us", "About", "Home") |
+                        @Html.ActionLink("Contact Us", "Contact", "Home") |
+                        <a data-toggle="modal" href="#myModal">Take the Survey</a>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="text-center">
+                        <p><strong>&copy; @DateTime.Now.Year - illinois Postsecondary Report Card</strong></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="//code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/treemap.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="//code.highcharts.com/modules/exporting.js"></script>
+    <script src="http://highcharts.github.io/export-csv/export-csv.js"></script>
+    <script type='text/javascript' data-cfasync='false' src="~/Scripts/purechat.js"></script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

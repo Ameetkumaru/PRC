@@ -1,0 +1,29 @@
+﻿@model PRC.Data.DTO.GetSchoolDetail
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+<div class="col-sm-9 col-sm-push-3 ">
+    <div class="row">
+        <h3> School Snapshot</h3>
+        <div class="col-sm-3 col-md-3">
+
+            <h4><b>Address Information</b></h4>
+            <address>
+                @Model.Addr
+                @Model.City  @Model.ZIP
+            </address>
+            <a class="btn btn-lg btn-primary" href=@Model.WebAddr target="_blank">School Website</a>
+        </div>
+        <div class="col-sm-3 col-md-3">
+            <h4><b>@Model.CHFTitle</b> </h4>
+            <h5>@Model.CHFNm</h5>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="col-sm-12 col-md-12"> @Html.Action("GoogleMap", "Home") </div>
+        </div>
+    </div>
+</div>
+

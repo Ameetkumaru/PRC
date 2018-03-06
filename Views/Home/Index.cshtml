@@ -1,0 +1,71 @@
+﻿@model PRC.Models.SchoolModel
+
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Assets/HighchartsScript/AcademicProgress.js"></script>
+<br /><br />
+<div class="container">
+    <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 jumbotron-Index ">
+        <div class="row"><br /><br /><br /></div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8  col-lg-offset-2 col-md-offset-2  text-center  jumbotron-textbox">
+
+                <h1>Illinois Postsecondary Report Card</h1><br />
+
+                <div class="form-inline inp">
+                    @Html.DropDownListFor(Model => Model.UNITID, ViewBag.SchoolList as SelectList, "---   Select School  ---", new { @class = "dropdown-item btn-outline-primary btn-lg btn btn-blue waves-effect", id = "SchoolListID" })
+                    <br /><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<!--Advanced Search-->
+<div class="col-md-12 col-lg-12 col-sm-12">
+    <div class="row">
+        @Html.Action("AdvancedSearch", "Home")
+    </div>
+</div>
+
+<!--Body Content Data-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-lg-3 ">
+            <h2 class="text-center">About Us</h2><hr style="color:deepskyblue" />
+            <p>
+                <strong>Illinois Postsecondary Report Card</strong> is state’s official source for information about public schools across Illinois. The information here will help you act as an informed partner in the education of our children.
+            </p><p>
+                Families, researchers, policy makers, and community members can use the site to find school data, including academic performance, school environment, educators, students, and highlights provided by principals.
+            </p>
+        </div>
+        <div class="col-md-5 col-sm-5 col-lg-5 ">
+            <h2 class="text-center">Illinois State</h2>
+            <div class=" col-md-12 col-sm-12 col-lg-12">
+                <div id="IllinoisEnrollment">
+                    <div id="IllinoisEnrollment" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-lg-4 ">
+            <h2 class="text-center">Let's Find </h2>
+            <div class="col-md-4 col-sm-4 col-lg-4"> @Html.Action("GoogleMap", "Home") </div>
+        </div>
+    </div>
+</div>
+
+<!-- Below script is invoked to navigate to detail page once school is selected-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#SchoolListID").change(function () {
+            var selected;
+            selected = $(this).val();
+
+            url = '@Url.Action("SetValue", "SchoolDetail", new {id = ""})' + '?SchoolID=' + selected;
+            window.location.href = url;
+        });
+});
+</script>
